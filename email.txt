@@ -1,0 +1,5 @@
+ To: everybody@gm
+ From: aya@gm
+ Subject: test send email method
+ dear everybody 
+ this is a hello message from aya hussein
