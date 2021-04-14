@@ -107,12 +107,15 @@ class Office:
         values("'+employee.full_name+'",'+employee.money+',"'+employee.sleepmood+'","'\
         +str(employee.healthRate)+'","'+employee.email+'","'+employee.workmood+'",'+employee.salary+','+employee.is_manager+'); ')
         mydb.commit()
+        print("Employee is added successfully")
+
     def fire(empId):
         cur.execute('delete from employee where id='+empId+';')
         mydb.commit()
+        print("employee record is deleted successfully, \n press 3 to get all available records now")
 
 while True:
-    print('''Welcome to our office system  
+    print('''\nWelcome to our office system  
             \nselect a number from 1 to 3  
             \n1- Hire new Employee
             \n2- Fire an Employee  
@@ -136,7 +139,7 @@ while True:
             ''')
 
             ch=input("Enter your choice: ")
-            if ch==1:
+            if int(ch)==1:
                 is_manager="1"
             
             full_name=input(">>Name: ")
@@ -160,7 +163,7 @@ while True:
             emp =Employee(email,salary,is_manager,full_name,money,workhours,sleephours,meals)
             Office.hire(emp)
     else:
-    print("Invalid Choice")
+        print("Invalid Choice")
 
 
 Employee.sendEmail("aya@gm","test send email method"," dear everybody \n this is a hello message from aya hussein","everybody@gm")
