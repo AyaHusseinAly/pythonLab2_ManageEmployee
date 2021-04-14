@@ -60,9 +60,19 @@ class Person:
             elif int(meals)== 1:
                 self.healthRate=50
 
+    @classmethod    
+    def buy(cls,items,id):
+        cur.execute('select money from employee where id='+str(id)+';')
+        records=cur.fetchall()
+        mydb.commit()
+        new_money = [str(record[0]) for record in records]
+        new_money=int(new_money[0])
+        new_money-=10*items
+        print(new_money)
+        cur.execute('update employee set money='+str(new_money)+' where id='+str(id)+';')
+        mydb.commit()
+        print("Record Updated successfully")
 
-    def buy(self,items):
-        self.money-=10*items
 
 
 class Employee(Person):
@@ -120,12 +130,17 @@ while True:
             \n1- Hire new Employee
             \n2- Fire an Employee  
             \n3- get all employees
-            \n4- Quit''')
+            \n4- buy items
+            \n5- Quit''')
 
     choice=input("Enter your choice: ")
-    if choice == "4":
+    if choice == "5":
         mydb.close()
         break
+    elif choice=="4":
+        empId=input("Enter the employee id: ")
+        items=input("Enter number of items: ")
+        Person.buy(int(items),int(empId))
     elif choice=="3":
         print(Office.get_all_employees())
     elif choice=="2":
